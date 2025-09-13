@@ -3,9 +3,11 @@ import { NextResponse } from "next/server";
 import cookie from "cookie";
 import { prisma } from "@/config/prisma";
 import { isTokenValid } from "@/utils/token";
+import { runCors } from "@/lib/cors";
 
 export async function POST(req: Request) {
   try {
+    runCors(req, NextResponse);
     const cookies = req.headers.get("cookie") || "";
     const parsedCookies = cookie.parse(cookies);
     const token = parsedCookies.admin_session;
