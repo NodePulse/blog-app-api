@@ -1,19 +1,28 @@
-// backend/lib/cors.ts
+// lib/cors-app.ts
 import Cors from "cors";
 
-// Initialize CORS middleware
-const cors = Cors({
+// Initialize CORS middleware for App Router
+export const cors = Cors({
+  origin: "https://your-frontend-domain.vercel.app", // replace
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  origin: "http://localhost:3000", // Replace with your frontend URL
-  credentials: true, // allow cookies if needed
+  credentials: true,
 });
 
-// Helper to run middleware in Next.js API route
-export function runCors(req: any, res: any) {
-  return new Promise((resolve, reject) => {
-    cors(req, res, (result: any) => {
-      if (result instanceof Error) return reject(result);
-      return resolve(result);
-    });
+// Helper for App Router
+export function runCors(req: Request) {
+  return new Promise<void>((resolve, reject) => {
+    // Convert Request to Next.js-like req/res
+    cors(
+      // @ts-ignore
+      { headers: req.headers },
+      {
+        // @ts-ignore
+        setHeader: (name: string, value: string) => {},
+      },
+      (result: unknown) => {
+        if (result instanceof Error) return reject(result);
+        return resolve();
+      }
+    );
   });
 }

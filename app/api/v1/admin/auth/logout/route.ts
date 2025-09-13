@@ -7,7 +7,7 @@ import { runCors } from "@/lib/cors";
 
 export async function POST(req: Request) {
   try {
-    runCors(req, NextResponse);
+    runCors(req);
     const cookies = req.headers.get("cookie") || "";
     const parsedCookies = cookie.parse(cookies);
     const token = parsedCookies.admin_session;

@@ -11,7 +11,7 @@ import { runCors } from "@/lib/cors";
 
 export async function POST(req: NextRequest) {
   try {
-    runCors(req, NextResponse);
+    runCors(req);
     const body = await req.json();
     const { email, password } = body;
 
