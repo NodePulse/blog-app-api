@@ -78,7 +78,8 @@ export async function POST(req: NextRequest) {
       "Set-Cookie",
       cookie.serialize("admin_session", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: false,
+        // secure: process.env.NODE_ENV === "production",
         sameSite: "none",
         maxAge: 1 * 60 * 60, // 1 hours in seconds
         path: "/",
