@@ -63,7 +63,7 @@ export async function POST(req: Request) {
       cookie.serialize("admin_session", "", {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        sameSite: "none",
         path: "/",
         maxAge: 0, // expire immediately
       })
