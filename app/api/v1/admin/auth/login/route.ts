@@ -7,11 +7,9 @@ import {
   generateSessionToken,
   hashToken,
 } from "@/utils/token";
-import { runCors } from "@/lib/cors";
 
 export async function POST(req: NextRequest) {
   try {
-    runCors(req);
     const body = await req.json();
     const { email, password } = body;
 
