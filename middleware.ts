@@ -3,10 +3,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // Define allowed origins
-const allowedOrigins =
-  process.env.NODE_ENV === "production"
-    ? ["https://your-frontend-domain.vercel.app"] // Add production domains here
-    : ["http://localhost:3000"]; // Add development domains here
+const allowedOrigins = ["http://localhost:3000"];
 
 export function middleware(request: NextRequest) {
   // Get the origin from the request headers
